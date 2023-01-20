@@ -273,7 +273,7 @@ def train(args):
 
   if args.pretrained_model_name_or_path is not None:
     sd_model_name = args.pretrained_model_name_or_path
-    if os.path.exists(sd_model_name):
+    if os.path.exists(sd_model_name) and os.path.isfile(sd_model_name):
       metadata["ss_sd_model_hash"] = train_util.model_hash(sd_model_name)
       metadata["ss_new_sd_model_hash"] = train_util.calculate_sha256(sd_model_name)
       sd_model_name = os.path.basename(sd_model_name)
@@ -281,7 +281,7 @@ def train(args):
 
   if args.vae is not None:
     vae_name = args.vae
-    if os.path.exists(vae_name):
+    if os.path.exists(vae_name) and os.path.isfile(sd_model_name):
       metadata["ss_vae_hash"] = train_util.model_hash(vae_name)
       metadata["ss_new_vae_hash"] = train_util.calculate_sha256(vae_name)
       vae_name = os.path.basename(vae_name)
