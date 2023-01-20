@@ -25,6 +25,9 @@ def train(args):
 
   cache_latents = args.cache_latents
 
+  if args.tf32:
+      torch.backends.cuda.matmul.allow_tf32 = True
+
   if args.seed is not None:
     set_seed(args.seed)                           # 乱数系列を初期化する
 

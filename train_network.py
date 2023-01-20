@@ -44,6 +44,9 @@ def train(args):
   cache_latents = args.cache_latents
   use_dreambooth_method = args.in_json is None
 
+  if args.tf32:
+      torch.backends.cuda.matmul.allow_tf32 = True
+
   if args.seed is not None:
     set_seed(args.seed)
 
@@ -264,7 +267,9 @@ def train(args):
       "ss_keep_tokens": args.keep_tokens,
       "ss_dataset_dirs": json.dumps(train_dataset.dataset_dirs_info),
       "ss_reg_dataset_dirs": json.dumps(train_dataset.reg_dataset_dirs_info),
-      "ss_training_comment": args.training_comment        # will not be updated after training
+      "ss_training_comment": args.training_comment,        # will not be updated after training
+      "ss_seed": args.seed,
+      "ss_tf32": bool(args.tf32)
   }
 
   # uncomment if another network is added

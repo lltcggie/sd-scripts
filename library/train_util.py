@@ -1099,6 +1099,7 @@ def add_training_arguments(parser: argparse.ArgumentParser, support_dreambooth: 
                       help="scheduler to use for learning rate / 学習率のスケジューラ: linear, cosine, cosine_with_restarts, polynomial, constant (default), constant_with_warmup")
   parser.add_argument("--lr_warmup_steps", type=int, default=0,
                       help="Number of steps for the warmup in the lr scheduler (default is 0) / 学習率のスケジューラをウォームアップするステップ数（デフォルト0）")
+  parser.add_argument("--tf32", action="store_true", help="Use TF32 if possible.")
 
   if support_dreambooth:
     # DreamBooth training
